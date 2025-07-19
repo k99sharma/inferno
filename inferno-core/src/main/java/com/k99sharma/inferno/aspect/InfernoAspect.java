@@ -2,8 +2,9 @@ package com.k99sharma.inferno.aspect;
 
 import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.config.InfernoConfig;
-import com.k99sharma.inferno.model.FailureMode;
+import com.k99sharma.inferno.config.InfernoProperties;
 import com.k99sharma.inferno.service.InfernoStats;
+import com.k99sharma.inferno.model.FailureMode;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,15 +24,22 @@ public class InfernoAspect {
     @Autowired
     private InfernoStats infernoStats;
 
+    @Autowired
+    private InfernoProperties props;
+
     @Around("@annotation(inferno)")
     public Object injectChaos(ProceedingJoinPoint joinPoint, InjectInferno inferno) throws Throwable {
+        // disable chaos globally
+        if(!props.isEnabled())
+            return joinPoint.proceed();
+
         infernoStats.recordRequest();
 
         FailureMode mode = inferno.mode();
         double rate = inferno.rate();
         int latencyMs = inferno.latencyMs();
 
-        // if AUTO -> get from config
+        // if AUTO -> get from com.k99sharma.inferno.infernoCore.com.k99sharma.inferno.config
         if(mode == FailureMode.AUTO){
             mode = config.getMode();
             rate = config.getRate();
