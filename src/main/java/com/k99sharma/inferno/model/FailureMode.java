@@ -5,5 +5,7 @@ public enum FailureMode {
     AUTO,
     LATENCY,
     EXCEPTION,
-    TIMEOUT
+    TIMEOUT,
+    CPU_SPIKE,
+    MEMORY_BOMB
 }
