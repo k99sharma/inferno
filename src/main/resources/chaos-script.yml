@@ -1,16 +1,16 @@
 sequence:
-  - mode: LATENCY
+  - mode: "LATENCY"
     rate: 0.4
     latencyMs: 1500
     duration: 20
 
-  - mode: EXCEPTION
+  - mode: "EXCEPTION"
     rate: 0.2
     duration: 10
 
-  - mode: TIMEOUT
+  - mode: "TIMEOUT"
     rate: 0.1
     duration: 5
 
-  - mode: OFF
+  - mode: "OFF"
     duration: 30

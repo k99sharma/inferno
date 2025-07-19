@@ -31,7 +31,7 @@ public class ScriptRunner implements Runnable{
 
         running.set(true);
 
-        try(InputStream input = getClass().getClassLoader().getResourceAsStream("chaos-stream.yml")){
+        try(InputStream input = getClass().getClassLoader().getResourceAsStream("chaos-script.yml")){
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             ChaosScript script = mapper.readValue(input, ChaosScript.class);
 
@@ -59,5 +59,9 @@ public class ScriptRunner implements Runnable{
             running.set(false);
             System.out.println("✅ Inferno script completed.");
         }
+    }
+
+    public boolean isRunning() {
+        return this.running.get();
     }
 }
