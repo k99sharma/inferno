@@ -5,16 +5,15 @@ import com.k99sharma.inferno.config.InfernoConfig;
 import com.k99sharma.inferno.config.InfernoProperties;
 import com.k99sharma.inferno.service.InfernoStats;
 import com.k99sharma.inferno.service.ScriptRunner;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
-@Configuration
+@AutoConfiguration
 @Import({
         InfernoAspect.class,
         InfernoStats.class,
-        InfernoConfig.class,
-        InfernoProperties.class,
         ScriptRunner.class
 })
-public class InfernoAutoConfiguration {
-}
+@EnableConfigurationProperties({InfernoConfig.class, InfernoProperties.class})
+public class InfernoAutoConfiguration {}

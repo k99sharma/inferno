@@ -1,9 +1,9 @@
 package com.k99sharma.inferno.config;
 
 import com.k99sharma.inferno.model.FailureMode;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Component
+@ConfigurationProperties(prefix = "inferno")
 public class InfernoConfig {
     private FailureMode mode = FailureMode.LATENCY;
     private double rate = 0.3;
