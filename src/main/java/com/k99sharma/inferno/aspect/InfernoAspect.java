@@ -3,6 +3,7 @@ package com.k99sharma.inferno.aspect;
 import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.config.InfernoConfig;
 import com.k99sharma.inferno.model.FailureMode;
+import com.k99sharma.inferno.service.InfernoStats;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,8 +20,13 @@ public class InfernoAspect {
     @Autowired
     private InfernoConfig config;
 
+    @Autowired
+    private InfernoStats infernoStats;
+
     @Around("@annotation(inferno)")
     public Object injectChaos(ProceedingJoinPoint joinPoint, InjectInferno inferno) throws Throwable {
+        infernoStats.recordRequest();
+
         FailureMode mode = inferno.mode();
         double rate = inferno.rate();
         int latencyMs = inferno.latencyMs();
@@ -33,6 +39,8 @@ public class InfernoAspect {
         }
 
         if(random.nextDouble() < rate) {
+            infernoStats.recordInjection(mode);
+
             switch (mode) {
                 case LATENCY -> {
                     Thread.sleep(latencyMs);
