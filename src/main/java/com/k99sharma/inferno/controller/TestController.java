@@ -20,4 +20,10 @@ public class TestController {
     public String crashTest() {
         return "This might crash";
     }
+
+    @GetMapping("/auto")
+    @InjectInferno(mode = FailureMode.AUTO)
+    public String autoPing() {
+        return "auto pong";
+    }
 }
