@@ -1,0 +1,39 @@
+site_name: Inferno
+site_url: https://k99sharma.github.io/inferno
+repo_url: https://github.com/k99sharma/inferno
+site_description: Chaos injection library for Spring Boot
+site_author: Kalash Sharma
+
+theme:
+  name: material
+  language: en
+  palette:
+    primary: deep orange
+    accent: indigo
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - content.code.annotate
+    - content.action.edit
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Failure Modes: failure-modes.md
+  - Annotation Guide: annotations.md
+  - Contributing: contributing.md
+
+markdown_extensions:
+  - codehilite
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - footnotes
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/k99sharma/inferno
+      name: GitHub
