@@ -6,9 +6,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.k99sharma</groupId>
+    <parent>
+        <groupId>com.github.k99sharma</groupId>
+        <artifactId>inferno</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <artifactId>inferno-core</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>inferno-core</name>
@@ -16,8 +20,6 @@
     <url>https://github.com/k99sharma/inferno</url>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -49,7 +51,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Testing dependencies -->
+        <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -66,7 +68,7 @@
     <build>
         <plugins>
 
-            <!-- Optional: Attach sources jar for IDEs -->
+            <!-- Attach sources JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
