@@ -7,5 +7,5 @@ public enum FailureMode {
     EXCEPTION,
     TIMEOUT,
     CPU_SPIKE,
-    MEMORY_BOMB
+    OUT_OF_MEMORY
 }
