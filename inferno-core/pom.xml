@@ -6,16 +6,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.k99sharma</groupId>
-        <artifactId>inferno</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
-
     <groupId>com.github.k99sharma</groupId>
     <artifactId>inferno-core</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
+    <name>inferno-core</name>
+    <description>Chaos injection library for Spring Boot</description>
+    <url>https://github.com/k99sharma/inferno</url>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -25,33 +23,33 @@
 
     <dependencies>
 
-        <!-- For @Aspect, AOP-based chaos injection -->
+        <!-- AOP for chaos injection -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- For reading YAML chaos script -->
+        <!-- YAML parsing -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
 
-        <!-- For inferno.enabled in application.yml -->
+        <!-- Configuration metadata -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Optional: Lombok for less boilerplate (if you use it) -->
+        <!-- Lombok (optional) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Optional: Unit testing -->
+        <!-- Testing dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -64,5 +62,26 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Optional: Attach sources jar for IDEs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
