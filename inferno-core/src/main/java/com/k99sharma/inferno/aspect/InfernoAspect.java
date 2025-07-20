@@ -3,6 +3,7 @@ package com.k99sharma.inferno.aspect;
 import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.config.InfernoConfig;
 import com.k99sharma.inferno.config.InfernoProperties;
+import com.k99sharma.inferno.config.InfernoRuntime;
 import com.k99sharma.inferno.service.InfernoStats;
 import com.k99sharma.inferno.model.FailureMode;
 import com.k99sharma.inferno.strategy.ChaosRegistry;
@@ -35,7 +36,7 @@ public class InfernoAspect {
     @Around("@annotation(inferno)")
     public Object injectChaos(ProceedingJoinPoint joinPoint, InjectInferno inferno) throws Throwable {
         // disable chaos globally
-        if(!props.isEnabled())
+        if(!(props.isEnabled() || InfernoRuntime.isAnnotationEnabled()))
             return joinPoint.proceed();
 
         infernoStats.recordRequest();
@@ -53,7 +54,7 @@ public class InfernoAspect {
             infernoStats.recordInjection(mode);
 
             ChaosStrategy strategy = chaosRegistry.get(mode);
-            strategy.execute();
+            strategy.execute(inferno.latencyMs(), config.getLatencyMs());
         }
 
         return joinPoint.proceed();

@@ -2,13 +2,12 @@ package com.k99sharma.inferno.strategy.impl;
 
 import com.k99sharma.inferno.strategy.ChaosStrategy;
 
-public class TimeOutStrategy implements ChaosStrategy {
-    private static final long TIMEOUT_MILLIS = 10000;
-
+public class LatencyStrategy implements ChaosStrategy {
     @Override
     public void execute(long annotationLatency, long configLatency) {
         try{
-            Thread.sleep(TIMEOUT_MILLIS);
+            long latency = annotationLatency > 0 ? annotationLatency : configLatency;
+            Thread.sleep(latency);
         }catch (InterruptedException ignore) {}
     }
 }

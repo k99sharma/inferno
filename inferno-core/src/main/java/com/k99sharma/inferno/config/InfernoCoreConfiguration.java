@@ -1,5 +1,6 @@
 package com.k99sharma.inferno.config;
 
+import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.aspect.InfernoAspect;
 import com.k99sharma.inferno.model.FailureMode;
 import com.k99sharma.inferno.service.InfernoStats;
@@ -27,10 +28,10 @@ public class InfernoCoreConfiguration {
     }
 
     @Bean
-    public ChaosRegistry chaosRegistry(InfernoConfig config) {
+    public ChaosRegistry chaosRegistry() {
         ChaosRegistry registry = new ChaosRegistry();
 
-        registry.register(FailureMode.LATENCY, new LatencyChaos(config.getLatencyMs()));
+        registry.register(FailureMode.LATENCY, new LatencyStrategy());
         registry.register(FailureMode.EXCEPTION, new ExceptionStrategy());
         registry.register(FailureMode.CPU_SPIKE, new CPUSpikeStrategy());
         registry.register(FailureMode.OUT_OF_MEMORY, new OutOfMemoryStrategy());

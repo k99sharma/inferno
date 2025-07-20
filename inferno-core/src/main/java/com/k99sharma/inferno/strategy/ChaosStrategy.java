@@ -1,5 +1,5 @@
 package com.k99sharma.inferno.strategy;
 
 public interface ChaosStrategy {
-    void execute();
+    void execute(long annotationLatency, long configLatency);
 }
