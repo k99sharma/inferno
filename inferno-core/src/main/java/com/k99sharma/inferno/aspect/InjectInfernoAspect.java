@@ -4,10 +4,10 @@ import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.config.InfernoConfig;
 import com.k99sharma.inferno.config.InfernoProperties;
 import com.k99sharma.inferno.config.InfernoRuntime;
-import com.k99sharma.inferno.service.InfernoStats;
 import com.k99sharma.inferno.model.FailureMode;
 import com.k99sharma.inferno.strategy.ChaosRegistry;
 import com.k99sharma.inferno.strategy.ChaosStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,16 +16,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+@Slf4j
 @Aspect
 @Component
-public class InfernoAspect {
+public class InjectInfernoAspect {
     private final Random random = new Random();
 
     @Autowired
     private InfernoConfig config;
-
-    @Autowired
-    private InfernoStats infernoStats;
 
     @Autowired
     private InfernoProperties props;
@@ -39,8 +37,6 @@ public class InfernoAspect {
         if(!(props.isEnabled() || InfernoRuntime.isAnnotationEnabled()))
             return joinPoint.proceed();
 
-        infernoStats.recordRequest();
-
         FailureMode mode = inferno.mode();
         double rate = inferno.rate();
 
@@ -51,8 +47,6 @@ public class InfernoAspect {
         }
 
         if(random.nextDouble() < rate) {
-            infernoStats.recordInjection(mode);
-
             ChaosStrategy strategy = chaosRegistry.get(mode);
             strategy.execute(inferno.latencyMs(), config.getLatencyMs());
         }

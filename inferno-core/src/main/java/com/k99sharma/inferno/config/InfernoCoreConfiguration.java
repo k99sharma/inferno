@@ -1,23 +1,18 @@
 package com.k99sharma.inferno.config;
 
-import com.k99sharma.inferno.annotations.InjectInferno;
-import com.k99sharma.inferno.aspect.InfernoAspect;
+import com.k99sharma.inferno.aspect.InjectInfernoAspect;
 import com.k99sharma.inferno.model.FailureMode;
-import com.k99sharma.inferno.service.InfernoStats;
-import com.k99sharma.inferno.service.ScriptRunner;
 import com.k99sharma.inferno.strategy.ChaosRegistry;
 import com.k99sharma.inferno.strategy.impl.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 @EnableConfigurationProperties({InfernoConfig.class, InfernoProperties.class})
 public class InfernoCoreConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(InfernoCoreConfiguration.class);
-
     public InfernoCoreConfiguration() {
         InfernoRuntime.markAnnotationEnabled();
     }
@@ -43,17 +38,7 @@ public class InfernoCoreConfiguration {
     }
 
     @Bean
-    public InfernoAspect infernoAspect() {
-        return new InfernoAspect();
-    }
-
-    @Bean
-    public InfernoStats infernoStats() {
-        return new InfernoStats();
-    }
-
-    @Bean
-    public ScriptRunner scriptRunner(InfernoConfig config) {
-        return new ScriptRunner(config);
+    public InjectInfernoAspect infernoAspect() {
+        return new InjectInfernoAspect();
     }
 }
