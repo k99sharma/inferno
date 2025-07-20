@@ -1,4 +1,4 @@
-package com.k99sharma.inferno.controller;
+package com.k99sharma.simulation.controller;
 
 import com.k99sharma.inferno.annotations.InjectInferno;
 import com.k99sharma.inferno.model.FailureMode;
