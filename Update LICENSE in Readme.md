@@ -127,7 +127,7 @@ You can try out Inferno in action using the included demo Spring Boot app locate
 
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT](LICENSE.txt) License.
 
 ## 👨‍💻 Author
 Made with 💻 + ☕ by Kalash Sharma
