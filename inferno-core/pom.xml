@@ -12,7 +12,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.github.k99sharma</groupId>
     <artifactId>inferno-core</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
