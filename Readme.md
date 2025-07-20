@@ -31,12 +31,14 @@ Perfect for resilience testing, retry/circuit breaker validation, fallback logic
 ## ⚙️ Installation
 
 Use JitPack to add Inferno to your project:
+[![](https://jitpack.io/v/k99sharma/inferno.svg)](https://jitpack.io/#k99sharma/inferno)
 
 <details>
 <summary><strong>Gradle</strong></summary>
 
 ```groovy
     repositories {
+        mavenCentral()
         maven { url 'https://jitpack.io' }
     }
     
@@ -56,14 +58,12 @@ Use JitPack to add Inferno to your project:
                 <url>https://jitpack.io</url>
             </repository>
         </repositories>
-        
-        <dependencies>
-            <dependency>
-                <groupId>com.github.k99sharma.inferno</groupId>
-                <artifactId>inferno-core</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-        </dependencies>
+
+        <dependency>
+            <groupId>com.github.k99sharma</groupId>
+            <artifactId>inferno</artifactId>
+            <version>v1.0.1</version>
+        </dependency>
 ```
 </details>
 
