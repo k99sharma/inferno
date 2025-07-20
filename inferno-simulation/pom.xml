@@ -1,58 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.k99sharma</groupId>
-        <artifactId>inferno</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.k99sharma</groupId>
     <artifactId>inferno-simulation</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>inferno-simulation</name>
+    <description>Spring Boot demo using inferno-core</description>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <spring.boot.version>3.2.0</spring.boot.version>
     </properties>
+
+    <repositories>
+        <!-- Maven Central for Spring Boot, etc. -->
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <!-- JitPack for inferno-core -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencies>
 
-        <!-- ✅ Core Spring Boot App -->
+        <!-- Your chaos library -->
+        <dependency>
+            <groupId>com.github.k99sharma</groupId>
+            <artifactId>inferno-core</artifactId>
+            <version>v1.0.0</version> <!-- match your Git tag -->
+        </dependency>
+
+        <!-- Basic Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- ✅ Your Chaos Library -->
-        <dependency>
-            <groupId>com.k99sharma</groupId>
-            <artifactId>inferno-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- (Optional) Actuator for metrics -->
+        <!-- Optional: Spring Boot AOP (if not inside core) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Optional: Lombok if used -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Optional: DevTools for hot reload during testing -->
+        <!-- Dev tools and testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- ✅ Testing (optional for now) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -60,5 +67,18 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Spring Boot Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
