@@ -76,11 +76,11 @@ Annotate any Spring component method:
 
 ### Parameters:
 
-| Attribute   | Description                                                  |
-|-------------|--------------------------------------------------------------|
-| `mode`      | The type of chaos to inject (e.g., `LATENCY`)                |
-| `latencyMs` | Delay duration in milliseconds (used only with `LATENCY`)    |
-| `rate`      | Probability of injection (0–100). Optional; default is 100%  |
+| Attribute   | Description                                         |
+|-------------|-----------------------------------------------------|
+| `mode`      | The type of chaos to inject (e.g., `LATENCY`)       |
+| `latencyMs` | Delay duration in milliseconds (used only with `LATENCY`) |
+| `rate`      | Probability of injection.   |
 
 ## 🧪 Run the Simulation App
 
