@@ -6,8 +6,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Setter
-@Getter
 @ConfigurationProperties(prefix = "inferno")
 public class InfernoProperties {
-    private boolean enabled = true;
+    private Boolean enabled = true;
+
+    public Boolean isEnabled() {
+        return enabled != null && enabled;
+    }
 }
