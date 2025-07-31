@@ -9,4 +9,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(InfernoCoreConfiguration.class)
-public @interface EnableInferno {}
+public @interface EnableInferno {
+    String[] profiles() default {};
+}

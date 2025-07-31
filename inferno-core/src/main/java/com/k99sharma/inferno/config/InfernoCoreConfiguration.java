@@ -1,5 +1,6 @@
 package com.k99sharma.inferno.config;
 
+import com.k99sharma.inferno.annotations.EnableInferno;
 import com.k99sharma.inferno.aspect.InjectInfernoAspect;
 import com.k99sharma.inferno.model.FailureMode;
 import com.k99sharma.inferno.strategy.ChaosRegistry;
@@ -8,11 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportAware;
+import org.springframework.core.type.AnnotationMetadata;
+
+import java.util.Map;
 
 @Slf4j
 @Configuration
 @EnableConfigurationProperties({InfernoConfig.class, InfernoProperties.class})
-public class InfernoCoreConfiguration {
+public class InfernoCoreConfiguration implements ImportAware {
     public InfernoCoreConfiguration() {
         InfernoRuntime.markAnnotationEnabled();
     }
@@ -40,5 +45,14 @@ public class InfernoCoreConfiguration {
     @Bean
     public InjectInfernoAspect infernoAspect() {
         return new InjectInfernoAspect();
+    }
+
+    @Override
+    public void setImportMetadata(AnnotationMetadata importMetadata) {
+        Map<String, Object> attributes = importMetadata.getAnnotationAttributes(EnableInferno.class.getName());
+        if (attributes != null) {
+            String[] enabledInfernoProfiles = (String[]) attributes.get("profiles");
+            InfernoRuntime.setProfiles(enabledInfernoProfiles);
+        }
     }
 }

@@ -12,8 +12,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -32,10 +35,22 @@ public class InjectInfernoAspect {
     @Autowired
     private ChaosRegistry chaosRegistry;
 
+    @Autowired
+    private Environment environment;
+
+
     @Around("@annotation(inferno)")
     public Object injectChaos(ProceedingJoinPoint joinPoint, InjectInferno inferno) throws Throwable {
         // disable chaos globally
         if(!(props.isEnabled() || InfernoRuntime.isAnnotationEnabled()))
+            return joinPoint.proceed();
+
+        // check if inferno is set for active profiles
+        List<String> activeProfiles = Arrays.asList(environment.getActiveProfiles());
+        List<String> allowedProfiles = Arrays.asList(InfernoRuntime.getProfiles());
+        boolean shouldInject = allowedProfiles.stream().anyMatch(activeProfiles::contains);
+
+        if(!allowedProfiles.isEmpty() && !shouldInject)
             return joinPoint.proceed();
 
         FailureMode mode = inferno.mode();
@@ -45,6 +60,11 @@ public class InjectInfernoAspect {
         double randomRate = ThreadLocalRandom.current().nextDouble();
         if(randomRate < rate) {
             ChaosStrategy strategy = chaosRegistry.get(mode);
+            if(strategy == null){
+                log.warn("No chaos strategy registered for mode: {}.", mode);
+                return joinPoint.proceed();
+            }
+
             strategy.execute(inferno.latencyMs(), config.getLatencyMs());
         }
 
