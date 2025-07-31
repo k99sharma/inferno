@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 @Aspect
@@ -46,7 +47,9 @@ public class InjectInfernoAspect {
             rate = config.getRate();
         }
 
-        if(random.nextDouble() < rate) {
+        // generating random rate between 0 and 1
+        double randomRate = ThreadLocalRandom.current().nextDouble();
+        if(randomRate < rate) {
             ChaosStrategy strategy = chaosRegistry.get(mode);
             strategy.execute(inferno.latencyMs(), config.getLatencyMs());
         }
