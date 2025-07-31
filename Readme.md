@@ -85,6 +85,7 @@ Apply `@InjectInferno` on any method in your controller, service, or repository:
 ```
 
 Make sure to enable inferno using `@EnableInferno` on your main application class.
+You can use profiles to enable inferno for active spring profiles e.g `@EnableInferno( profiles = {'dev', 'test'} )`
 
 ## 🔥 Available Failure Modes
 
@@ -92,13 +93,11 @@ Inferno supports multiple failure strategies to help developers test the resilie
 
 | Mode           | Description                                      |
 |----------------|--------------------------------------------------|
-| `OFF`          | Disables chaos injection for the annotated method |
 | `LATENCY`      | Introduces an artificial delay (`latencyMs`) before method execution |
 | `EXCEPTION`    | Throws a runtime exception to simulate failure   |
 | `TIMEOUT`      | Simulates an indefinitely hanging thread (long sleep or loop) |
 | `CPU_SPIKE`    | Runs a CPU-intensive loop to consume processor cycles |
 | `OUT_OF_MEMORY`| Attempts to allocate excessive memory to simulate memory pressure |
-| `AUTO`         | Randomly selects one of the active failure modes (except OFF) |
 
 > You can control these modes using the `@InjectInferno` annotation directly on any method in your application.
 
