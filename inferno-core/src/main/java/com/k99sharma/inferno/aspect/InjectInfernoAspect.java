@@ -41,12 +41,6 @@ public class InjectInfernoAspect {
         FailureMode mode = inferno.mode();
         double rate = inferno.rate();
 
-        // if AUTO -> get from config
-        if(mode == FailureMode.AUTO){
-            mode = config.getMode();
-            rate = config.getRate();
-        }
-
         // generating random rate between 0 and 1
         double randomRate = ThreadLocalRandom.current().nextDouble();
         if(randomRate < rate) {
