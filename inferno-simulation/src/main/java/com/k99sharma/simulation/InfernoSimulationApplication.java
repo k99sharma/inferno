@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableInferno
+@EnableInferno(profiles = {"dev"})
 public class InfernoSimulationApplication {
 
 	public static void main(String[] args) {

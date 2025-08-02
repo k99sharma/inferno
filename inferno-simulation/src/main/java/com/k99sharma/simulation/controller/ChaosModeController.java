@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/inferno/test")
 public class ChaosModeController {
-    @GetMapping("/auto")
-    @InjectInferno(mode = FailureMode.AUTO, rate = 0.3)
-    public String autoTest() {
-        return "Default Mode";
-    }
-
     @GetMapping("/latency")
     @InjectInferno(mode = FailureMode.LATENCY, rate = 0.3, latencyMs = 2000)
     public String latencyTest() {
