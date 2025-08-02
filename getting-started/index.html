@@ -729,12 +729,18 @@
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nf">app</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
 </code></pre></div>
 
+<p>You can also configure inferno to run with specific active profiles:</p>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nd">@SpringBootApplication</span>
+<span class="w">    </span><span class="nd">@EnableInferno</span><span class="p">(</span><span class="n">profiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="err">&#39;</span><span class="n">dev</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="n">test</span><span class="err">&#39;</span><span class="p">})</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nf">app</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
+
 <h2 id="using-injectinferno">✅ Using @InjectInferno<a class="headerlink" href="#using-injectinferno" title="Permanent link">&para;</a></h2>
 <p>Annotate any Spring component method:</p>
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nd">@InjectInferno</span><span class="p">(</span>
 <span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FailureMode</span><span class="p">.</span><span class="na">LATENCY</span><span class="p">,</span>
 <span class="w">        </span><span class="n">latencyMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
-<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Success&quot;</span><span class="p">;</span>
