@@ -60,6 +60,14 @@ Enable using annotation (recommended):
     public class app() {}
 ```
 
+You can also configure inferno to run with specific active profiles:
+
+```java
+    @SpringBootApplication
+    @EnableInferno(profiles = {'dev', 'test'})
+    public class app() {}
+```
+
 ## ✅ Using @InjectInferno
 
 Annotate any Spring component method:
@@ -67,7 +75,7 @@ Annotate any Spring component method:
     @InjectInferno(
         mode = FailureMode.LATENCY,
         latencyMs = 1000,
-        rate = 100
+        rate = 0.3
     )
     public String getData() {
         return "Success";
